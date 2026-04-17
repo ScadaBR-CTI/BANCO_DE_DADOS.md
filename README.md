@@ -1,4 +1,4 @@
-# Banco de Dados | ScadaBR-CTI
+# Banco de Dados
 
 Este repositório reúne informações técnicas relacionadas à estrutura, recuperação, organização e utilização do banco de dados empregado no projeto **ScadaBR-CTI**, aplicado ao monitoramento energético e operacional do **CTI Renato Archer**.
 
