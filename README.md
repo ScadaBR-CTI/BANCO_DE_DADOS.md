@@ -14,6 +14,10 @@ Essas informações incluem séries temporais de consumo elétrico, demanda de p
 
 A recuperação adequada dessa base tornou possível transformar um grande volume de dados históricos em uma estrutura organizada e pronta para análises técnicas.
 
+---
+
+## Fluxograma
+
 <p align="center">
   <img src="img/Fluxograma.png" alt="Fluxograma ScadaBR CTI" width="80%">
 </p>
