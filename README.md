@@ -203,6 +203,8 @@ Transformar dados brutos operacionais em inteligência aplicada para:
 
 Base restaurada, tratada e integrada ao ecossistema analítico do projeto **ScadaBR-CTI**, servindo como núcleo principal das análises energéticas desenvolvidas.
 
+**[Página Inicial](https://github.com/ScadaBR-CTI)**
+
 ---
 
 > Este banco de dados representa a base histórica e operacional necessária para conectar automação industrial, análise estatística e eficiência energética no CTI Renato Archer.
