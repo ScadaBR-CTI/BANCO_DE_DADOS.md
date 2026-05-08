@@ -16,7 +16,8 @@ A recuperação adequada dessa base tornou possível transformar um grande volum
 
 ---
 
-## Fluxograma
+## Fluxo de Tratamento de Dados
+Para garantir que as informações coletadas no campo sejam confiáveis e prontas para análise, o projeto segue um processo estruturado de Extração, Tratamento e Carga (ETL). O diagrama resumido abaixo ilustra como os dados brutos do ScadaBR são transformados:
 
 <p align="center">
   <img src="img/Fluxograma_resumido.png" alt="Fluxograma ScadaBR CTI" width="80%">
