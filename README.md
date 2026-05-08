@@ -19,7 +19,7 @@ A recuperação adequada dessa base tornou possível transformar um grande volum
 ## Fluxograma
 
 <p align="center">
-  <img src="img/Fluxograma.png" alt="Fluxograma ScadaBR CTI" width="80%">
+  <img src="img/Fluxograma_resumido.png" alt="Fluxograma ScadaBR CTI" width="80%">
 </p>
 
 ---
