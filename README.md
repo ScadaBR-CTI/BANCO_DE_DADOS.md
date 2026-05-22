@@ -234,5 +234,5 @@ A base encontra-se restaurada, tratada e integrada ao ecossistema analítico do 
 
 ---
 
-- **[Página Inicial do Projeto](https://github.com/ScadaBR-CTI)**
+- **[Página Inicial](https://github.com/ScadaBR-CTI)**
 
