@@ -1,23 +1,30 @@
 # Banco de Dados
 
-Este repositório reúne informações técnicas relacionadas à estrutura, recuperação, organização e utilização do banco de dados empregado no projeto **ScadaBR-CTI**, aplicado ao monitoramento energético e operacional do **CTI Renato Archer**.
+Este repositório reúne a documentação técnica relacionada à recuperação, organização e utilização do banco de dados do projeto **ScadaBR-CTI**, aplicado ao monitoramento energético e operacional do **CTI Renato Archer**.
 
-O objetivo desta documentação é apresentar de forma clara como os dados foram restaurados, tratados e preparados para análises posteriores, dashboards e geração de indicadores estratégicos.
-
----
-
-## Visão Geral
-
-Os dados utilizados neste projeto são provenientes do sistema supervisório **ScadaBR**, responsável pelo armazenamento contínuo de medições operacionais e energéticas de diversos pontos monitorados dentro da infraestrutura do CTI Renato Archer.
-
-Essas informações incluem séries temporais de consumo elétrico, demanda de potência, estados operacionais e registros associados aos sensores distribuídos no ambiente monitorado.
-
-A recuperação adequada dessa base tornou possível transformar um grande volume de dados históricos em uma estrutura organizada e pronta para análises técnicas.
+O objetivo desta seção é apresentar como a base histórica do sistema supervisório foi restaurada, tratada e estruturada para utilização em análises técnicas, dashboards e geração de indicadores operacionais.
 
 ---
 
-## Fluxo de Tratamento de Dados
-Para garantir que as informações coletadas no campo sejam confiáveis e prontas para análise, o projeto segue um processo estruturado de Extração, Tratamento e Carga (ETL). O diagrama resumido abaixo ilustra como os dados brutos do ScadaBR são transformados:
+# Visão Geral
+
+Os dados utilizados no projeto são provenientes do sistema supervisório **ScadaBR**, responsável pelo armazenamento contínuo de medições operacionais e energéticas de diversos pontos monitorados na infraestrutura do CTI Renato Archer.
+
+A base contém principalmente:
+
+- Leituras de consumo elétrico
+- Demandas de potência
+- Estados operacionais
+- Eventos e alarmes
+- Registros históricos de sensores
+
+Essas informações são armazenadas em formato de séries temporais, permitindo análises históricas e acompanhamento operacional da infraestrutura monitorada.
+
+---
+
+# Fluxo de Tratamento de Dados
+
+Para garantir integridade, desempenho e organização da informação, o projeto segue um processo estruturado de recuperação, tratamento e disponibilização dos dados.
 
 <p align="center">
   <img src="img/Fluxograma_resumido.png" alt="Fluxograma ScadaBR CTI" width="80%">
@@ -25,95 +32,115 @@ Para garantir que as informações coletadas no campo sejam confiáveis e pronta
 
 ---
 
-## Origem dos Dados
+# Origem da Base de Dados
 
-O banco original foi disponibilizado em formato **.SQL**, contendo backup completo do sistema ScadaBR.
+A base original foi disponibilizada em formato de backup `.sql`, contendo a estrutura completa do sistema ScadaBR, incluindo tabelas, registros históricos e informações administrativas.
 
 ### Período dos Registros
 
-* Início: **14/08/2019**
-* Fim: **03/04/2023**
+- Início: **14/08/2019**
+- Fim: **03/04/2023**
 
-### Conteúdo do Backup
-
-A base continha informações como:
-
-* Leituras de medidores elétricos
-* Histórico de sensores
-* Demandas de potência
-* Eventos do sistema
-* Alarmes automáticos
-* Registros administrativos
-* Informações de usuários
-
----
-
-## Volume Inicial de Dados
+### Volume Inicial
 
 O arquivo original possuía tamanho superior a:
 
 **5 GB**
 
-Devido ao volume elevado, tornou-se necessário recriar a base em ambiente controlado, permitindo limpeza, otimização e consultas mais eficientes.
+Devido ao elevado volume de informações, foi necessário recriar a base em ambiente controlado, permitindo melhor desempenho em consultas, limpeza de registros desnecessários e otimização estrutural.
 
 ---
 
-## Ambiente Utilizado
-
-As ferramentas principais empregadas no processo foram:
+# Ambiente Utilizado
 
 ### Banco de Dados
 
-* MySQL 8.0
-* MariaDB
+- MySQL 8.0
+- MariaDB
 
-### Manipulação e Consulta
+### Ferramentas de Manipulação
 
-* DBeaver
+- DBeaver
+- Terminal do Windows
 
-### Análise Posterior
+### Recursos Utilizados no Processo
 
-* Linguagem R
-* Shiny
-* SQL
+- Comandos SQL para criação e recuperação da base
+- Importação via linha de comando do MySQL
+- Consultas e validações estruturais do banco
 
 ---
 
-## Processo de Recuperação
+# Recuperação da Base de Dados
 
-A restauração da base foi realizada diretamente pelo terminal do Windows utilizando MySQL, opção escolhida por oferecer maior desempenho e estabilidade para arquivos grandes.
+A restauração do banco foi realizada a partir de um arquivo de backup `.sql` exportado do ScadaBR. O arquivo utilizado no processo, já tratado e otimizado, encontra-se disponível na rede interna do CTI no diretório:
 
-### Etapas Utilizadas
+```text
+\\gonzaga\projetos\ScadaLTS
+```
+
+O procedimento foi executado via terminal do Windows utilizando MySQL, abordagem escolhida por oferecer maior estabilidade no processamento de arquivos grandes.
+
+## Etapas de Restauração do Backup `.sql`
+
+### 1. Acessar o MySQL
 
 ```sql
 mysql -u root -p
+```
 
+### 2. Criar um novo banco de dados
+
+```sql
 CREATE DATABASE scadabr;
+```
 
+### 3. Encerrar o terminal do MySQL
+
+```sql
 exit;
+```
 
+### 4. Importar o arquivo de backup
+
+```sql
 mysql -u root -p scadabr < "C:\caminho\arquivo.sql"
+```
 
+Neste comando:
+
+- `scadabr` representa o banco criado anteriormente
+- `"C:\caminho\arquivo.sql"` corresponde ao arquivo de backup exportado do sistema
+
+### 5. Validar a importação
+
+Após a conclusão da importação:
+
+```sql
+mysql -u root -p
+```
+
+```sql
 USE scadabr;
 
 SHOW TABLES;
 ```
 
-Após a importação, todas as tabelas originais do sistema passaram a estar disponíveis para consulta.
+Se as tabelas forem exibidas corretamente, a restauração foi concluída com sucesso.
 
 ---
 
-## Tratamento e Limpeza dos Dados
+# Tratamento e Limpeza dos Dados
 
-O banco original continha tabelas administrativas que não seriam necessárias para análises energéticas históricas.
+Após a recuperação da base, foi realizado um processo de limpeza para remover informações administrativas que não eram relevantes para as análises energéticas.
 
-Foram removidos principalmente registros de:
+Foram removidos principalmente:
 
-* Eventos automáticos
-* Alertas internos
-* Logs operacionais secundários
+- Eventos automáticos
+- Logs secundários
+- Registros internos do sistema
 
-### Comandos Aplicados
+## Comandos Utilizados
 
 ```sql
 USE scadabr;
@@ -123,88 +150,89 @@ TRUNCATE TABLE events;
 TRUNCATE TABLE userEvents;
 ```
 
----
-
-## Resultado da Otimização
-
-Após o processo de limpeza:
-
-* Base original: **+5 GB**
-* Base tratada: **menos de 2 GB**
-
-Essa redução melhorou significativamente:
-
-* Velocidade de consultas
-* Exportação de dados
-* Performance geral
-* Organização estrutural
+Esse processo reduziu significativamente o tamanho final da base e melhorou a performance das consultas analíticas.
 
 ---
 
-## Estrutura de Dados Relevante
+# Resultado da Otimização
 
-As tabelas mais importantes para o projeto concentram:
+Após o tratamento:
+
+- Base original: **mais de 5 GB**
+- Base otimizada: **menos de 2 GB**
+
+A otimização proporcionou melhorias em:
+
+- Velocidade de consulta
+- Exportação de dados
+- Organização estrutural
+- Performance geral do ambiente analítico
+
+---
+
+# Estrutura de Dados
+
+As tabelas mais importantes para o projeto são:
+
+### DataSources
+
+Tabelas responsáveis pelas informações de configuração, origem e organização dos pontos monitorados no sistema supervisório.
 
 ### DataPoints
 
-Identificação de sensores e medidores monitorados.
+Tabela responsável pela identificação dos sensores, medidores e variáveis monitoradas.
 
 ### PointValues
 
-Valores históricos medidos ao longo do tempo.
-
-### Metadados
-
-Informações técnicas de configuração dos pontos.
+Tabela que armazena os valores históricos registrados ao longo do tempo.
 
 ---
 
-## Visualização e Extração
+# Consulta e Extração de Dados
 
-Após tratamento da base, a ferramenta **DBeaver** foi utilizada para:
+Após o tratamento da base, a ferramenta **DBeaver** foi utilizada para:
 
-* Navegação entre tabelas
-* Criação de consultas SQL
-* Filtros por período
-* Seleção de sensores específicos
-* Exportação em CSV
+- Navegação entre tabelas
+- Construção de consultas SQL
+- Filtragem por período
+- Seleção de sensores específicos
+- Exportação de dados em CSV
 
-Essa etapa permitiu integrar os dados posteriormente ao ambiente analítico em R.
-
----
-
-## Aplicações no Projeto
-
-Os dados extraídos do banco são utilizados em:
-
-* Gráficos de demanda elétrica
-* Perfis de carga
-* Comparações horárias e sazonais
-* Estudos de eficiência energética
-* Dashboards interativos
-* Indicadores operacionais
-* Detecção de anomalias
+Essas informações foram posteriormente integradas ao ambiente analítico desenvolvido em linguagem R.
 
 ---
 
-## Objetivo Estratégico
+# Aplicações no Projeto
 
-Transformar dados brutos operacionais em inteligência aplicada para:
+Os dados extraídos da base são utilizados em:
 
-* Redução de desperdícios
-* Melhor uso da energia elétrica
-* Identificação de picos de consumo
-* Apoio à tomada de decisão
-* Planejamento operacional
-
----
-
-## Status Atual
-
-Base restaurada, tratada e integrada ao ecossistema analítico do projeto **ScadaBR-CTI**, servindo como núcleo principal das análises energéticas desenvolvidas.
-
-**[Página Inicial](https://github.com/ScadaBR-CTI)**
+- Perfis de carga elétrica
+- Análises de demanda
+- Comparações horárias e sazonais
+- Dashboards interativos
+- Indicadores operacionais
+- Estudos de eficiência energética
+- Detecção de anomalias
 
 ---
 
-> Este banco de dados representa a base histórica e operacional necessária para conectar automação industrial, análise estatística e eficiência energética no CTI Renato Archer.
+# Objetivo Estratégico
+
+Transformar dados históricos e operacionais em informações estratégicas para apoio à tomada de decisão, permitindo:
+
+- Redução de desperdícios energéticos
+- Identificação de picos de consumo
+- Melhor utilização da infraestrutura elétrica
+- Apoio ao planejamento operacional
+- Monitoramento contínuo do ambiente supervisionado
+
+---
+
+# Conclusão
+
+A base encontra-se restaurada, tratada e integrada ao ecossistema analítico do projeto **ScadaBR-CTI**, servindo como núcleo principal das análises energéticas e operacionais desenvolvidas.
+
+---
+
+- **[Página Inicial do Projeto](https://github.com/ScadaBR-CTI)**
+
