@@ -27,7 +27,7 @@ Essas informações são armazenadas em formato de séries temporais, permitindo
 Para garantir integridade, desempenho e organização da informação, o projeto segue um processo estruturado de recuperação, tratamento e disponibilização dos dados.
 
 <p align="center">
-  <img src="img/Fluxograma_resumido.png" alt="Fluxograma ScadaBR CTI" width="80%">
+  <img src="img/Fluxo.png" alt="Fluxograma ScadaBR CTI" width="80%">
 </p>
 
 ---
